@@ -7,6 +7,7 @@ import { IStation } from '../interfaces/i-station';
 })
 
 export class DataService {
+  
   private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig='; 
   private stnInfoPt2 = '';  //put station abbreviations here
   private stnInfoPt3 = '&key=Z5RS-PL6X-97JT-DWE9&json=y'; //put your key here
