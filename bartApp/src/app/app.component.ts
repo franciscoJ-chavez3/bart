@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DataService } from './services/data.service';
 import { DeparturesService } from './services/departures.service';
+import { IStation } from './interfaces/i-station';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ import { DeparturesService } from './services/departures.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  //store dataService info in this variable
+  menuItems: IStation[];
   public selectedIndex = 0;
   public appPages = [
     {
@@ -45,7 +48,6 @@ export class AppComponent implements OnInit {
       icon: 'warning'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -65,6 +67,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    //i added this
+    this.menuItems = this.ds.getStnData();
     const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());

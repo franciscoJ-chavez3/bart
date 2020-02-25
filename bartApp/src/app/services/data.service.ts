@@ -73,4 +73,9 @@ export class DataService {
           //console log array back in StnData
       });
   } //end of parseData function
+
+  getStnData(): IStation[] {
+    //return stationsArr
+    return this.stationsArr;
+  }
 }

@@ -1,5 +1,7 @@
 {
   "name": "bartApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

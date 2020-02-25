@@ -4,5 +4,5 @@ export interface IStntime {
     stnAbbr: string;
     stnDate: string;
     stnTime: string;
-    stnETD: IStndepart[];
+    stnETD: string[];
 }
