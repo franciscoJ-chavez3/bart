@@ -5,4 +5,5 @@ export interface IStndepart {
     destimate2: string;
     destimate3: string;
     destDirect: string;
+    destPlat: string;
 }

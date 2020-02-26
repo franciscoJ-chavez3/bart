@@ -13,6 +13,8 @@ export class DeparturesService {
   timeArr: IStndepart[] = [];
   departArr: IStntime[] = [];
 
+  stnData: IStndepart[] = [];
+
   //Lincoln
   everything: any;
 
@@ -20,7 +22,7 @@ export class DeparturesService {
   stnTimesPt1 = 'http://api.bart.gov/api/etd.aspx?cmd=etd&orig=';
   stnTimesPt2;
   stnTimesPt3 = '&key=Z5RS-PL6X-97JT-DWE9&json=y';
-  
+  stnTest = 'http://api.bart.gov/api/etd.aspx?cmd=etd&orig=12TH&key=Z5RS-PL6X-97JT-DWE9&json=y';
   //Lincoln All
   stnAll = 'http://api.bart.gov/api/etd.aspx?cmd=etd&orig=ALL&key=Z5RS-PL6X-97JT-DWE9&json=y'
   //will be the sum of pts 1 thru 3
@@ -49,6 +51,7 @@ export class DeparturesService {
     //Lincoln did this
     //this.stnTimeData()
     this.parseStations(this.stnAll);
+    //this.parseStnData(this.stnTest);
   }
 
   //lincoln commented out
@@ -69,13 +72,48 @@ export class DeparturesService {
   }
 
   //lincoln made
-  parseStations(url){
+  parseStations(url) {
     let stationSheet = this.http.get(url);
     stationSheet.subscribe(
       x => {
         console.log(x);
       }
     );
+  }
+
+  parseStnData(url) {
+    console.log('in parseStnData(url) of ts')
+    let etdSheet = this.http.get(url);
+    console.log('after');
+    etdSheet.subscribe(
+      x => {
+        console.log(x);
+        console.log('i am in Arrow');
+        for (let s of x.root.station[0].etd) {
+          let info: IStndepart = {
+            stnDest: s.destination,
+            destAbbr: s.abbreviation,
+            destimate1: s.estimate[0].minutes,
+            destimate2: s.estimate[1].minutes,
+            destimate3: s.estimate[2].minutes,
+            destDirect: s.estimate[0].direction,
+            destPlat: s.estimate[0].platform
+          }; // end of Obj
+          //push info into stnData
+          this.stnData.push(info);
+        } // end of For
+      } // end of Arrow
+    ); // end of Subscribe
+    //log this.stnData
+    console.log(this.stnData);
+  } // end of parseStnData()
+
+  returnStnData(): IStndepart[] {
+    return this.stnData;
+  }
+
+  resetStnData() {
+    this.stnData = [];
   }
 
   parseTimeData(url) {
@@ -96,7 +134,8 @@ export class DeparturesService {
             destimate1: s.estimate[0].minutes,
             destimate2: s.estimate[1].minutes,
             destimate3: s.estimate[2].minutes,
-            destDirect: s.estimate[0].direction
+            destDirect: s.estimate[0].direction,
+            destPlat: s.estimate[0].platform
           }; //end of Obj
           //push info into timeArr array
           this.timeArr.push(info);

@@ -8,7 +8,7 @@
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of menuItems; 
           let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.stnURL]" lines="none"
+            <ion-item (click)="getStnData(p.stnAbbr)" routerDirection="root" [routerLink]="[p.stnURL]" lines="none"
               detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.stnName }}</ion-label>

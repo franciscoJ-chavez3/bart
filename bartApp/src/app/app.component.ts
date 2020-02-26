@@ -74,4 +74,12 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+
+  getStnData(urlPiece) {
+    //insert url piece into url
+    console.log(urlPiece);
+    const url = 'http://api.bart.gov/api/etd.aspx?cmd=etd&orig=' + urlPiece + '&key=Z5RS-PL6X-97JT-DWE9&json=y';
+    //pass url into service function
+    this.ts.parseStnData(url);
+  }
 }
