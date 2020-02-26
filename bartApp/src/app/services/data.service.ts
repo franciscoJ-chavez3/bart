@@ -7,7 +7,8 @@ import { IStation } from '../interfaces/i-station';
 })
 
 export class DataService {
-
+  //this page was a mistake, but kept it because it was working
+  //ended up using as a substitue for appPages
   private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig='; 
   private stnInfoPt2 = '';  //put station abbreviations here
   private stnInfoPt3 = '&key=Z5RS-PL6X-97JT-DWE9&json=y'; //put your key here
@@ -32,6 +33,7 @@ export class DataService {
   private stnInfoURL;
   private dataSheet;
 
+  //
   stationsArr: IStation[] = [];
 
   constructor(private http: HttpClient) {

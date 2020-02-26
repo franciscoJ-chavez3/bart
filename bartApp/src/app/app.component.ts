@@ -77,9 +77,11 @@ export class AppComponent implements OnInit {
 
   getStnData(urlPiece) {
     //insert url piece into url
-    console.log(urlPiece);
     const url = 'http://api.bart.gov/api/etd.aspx?cmd=etd&orig=' + urlPiece + '&key=Z5RS-PL6X-97JT-DWE9&json=y';
+
+    const urlInfo = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig='+ urlPiece + '&key=Z5RS-PL6X-97JT-DWE9&json=y';
     //pass url into service function
     this.ts.parseStnData(url);
+    this.ts.parseStnInfo(urlInfo);
   }
 }

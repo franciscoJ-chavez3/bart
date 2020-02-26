@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IStndepart } from '../interfaces/i-stndepart';
 import { IStntime } from '../interfaces/i-stntime';
+import { IStation } from '../interfaces/i-station';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class DeparturesService {
   timeArr: IStndepart[] = [];
   departArr: IStntime[] = [];
 
+
+  stnInfo: IStation[] = [];
   stnData: IStndepart[] = [];
 
   //Lincoln
@@ -82,13 +85,14 @@ export class DeparturesService {
   }
 
   parseStnData(url) {
-    console.log('in parseStnData(url) of ts')
-    let etdSheet = this.http.get(url);
-    console.log('after');
+    this.stnData.length = 0;
+    let etdSheet = this.http.get<any>(url);
     etdSheet.subscribe(
       x => {
         console.log(x);
-        console.log('i am in Arrow');
+        this.everything = x.root.station[0];
+        console.log(this.everything);
+        console.log('in ts parseStnData');
         for (let s of x.root.station[0].etd) {
           let info: IStndepart = {
             stnDest: s.destination,
@@ -112,9 +116,36 @@ export class DeparturesService {
     return this.stnData;
   }
 
-  resetStnData() {
-    this.stnData = [];
+  returnStnInfo(): IStation[] {
+    return this.stnInfo;
   }
+
+  parseStnInfo(url) {
+    this.stnInfo.length = 0;
+    //put http content into dataSheet
+    let dataSheet = this.http.get<any>(url);
+    //subscribe of observable : any
+    dataSheet.subscribe(
+      x => {
+        //filter, set s to desired filtered content
+        let s = x.root.stations.station;
+        //transfer desired into info of type IStation
+        let info: IStation = {
+          stnAbbr: s.abbr,
+          stnName: s.name,
+          stnAddress: s.address,
+          stnCity: s.city,
+          stnState: s.state,
+          stnZip: s.zipcode,
+          stnDesc: s.intro,
+          stnURL: 'folder/' + s.abbr
+        };
+        //push info into stationsArr
+        this.stnInfo.push(info);
+        //console log array back in StnData
+      });
+      console.log(this.stnInfo);
+  } //end of parseData function
 
   parseTimeData(url) {
     //put http content into timeSheet
