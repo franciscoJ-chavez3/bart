@@ -29,38 +29,41 @@
   <ng-template #elseBlock>
     <div id="container">
       <div *ngFor="let fsi of folderStnInfo">
-        <strong class="capitalize">{{ fsi?.stnName }}</strong>
         <ion-grid>
           <ion-row>
-            <ion-col></ion-col>
-            <ion-col>{{fsi?.stnAddress}} {{fsi?.stnCity}},{{fsi?.stnState}} {{fsi?.stnZip}}</ion-col>
-            <ion-col></ion-col>
-          </ion-row>
-          <ion-row>
             <ion-col>
-              {{fsi?.stnDesc["#cdata-section"]}}
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-subtitle>{{fsi?.stnAddress}} {{fsi?.stnCity}}, {{fsi?.stnState}}   {{fsi?.stnZip}}</ion-card-subtitle>
+                  <ion-card-title>{{ fsi?.stnName }}</ion-card-title>
+                </ion-card-header>
+              
+                <ion-card-content class="ion-text-start">
+                  {{fsi?.stnDesc["#cdata-section"]}}
+                </ion-card-content>
+              </ion-card>
             </ion-col>
           </ion-row>
-          <ion-row></ion-row>
-          <ion-row></ion-row>
           <ion-row>
             <ion-col>
               <strong>Real Time Departures</strong>
             </ion-col>
           </ion-row>
-        </ion-grid>
+        </ion-grid> 
       </div>
       <div *ngFor="let fsd of folderStnData">
         <ion-grid>
-          <ion-row>
-            <ion-col>
-              {{fsd?.destAbbr}}
-            </ion-col>
-            <ion-col></ion-col>
-            <ion-col>
-              {{fsd?.destimate1}}, {{fsd?.destimate2}}, {{fsd?.destimate3}} min
-            </ion-col>
-          </ion-row>
+            <ion-list>
+              <ion-item class="ion-justify-content-between">
+                <ion-col size="3">
+                  {{fsd?.destAbbr}}
+                </ion-col>
+                <ion-col size="2"></ion-col>
+                <ion-col size="7" class="ion-text-end">
+                  {{fsd?.destimate1}}, {{fsd?.destimate2}}, {{fsd?.destimate3}} min
+                </ion-col>
+              </ion-item>
+            </ion-list>
         </ion-grid>
       </div>
     </div>

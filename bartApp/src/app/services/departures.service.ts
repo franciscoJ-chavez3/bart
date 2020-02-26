@@ -11,6 +11,7 @@ export class DeparturesService {
 
   //store stnInfo ~ address, city, zip, etc.
   stnInfo: IStation[] = [];
+  
   //store stnData ~ departure times
   stnData: IStndepart[] = [];
 
@@ -60,6 +61,7 @@ export class DeparturesService {
     //subscribe of observable : any
     dataSheet.subscribe(
       x => {
+        console.log(x);
         //filter, set s to desired filtered content
         let s = x.root.stations.station;
         //transfer desired into info of type IStation
