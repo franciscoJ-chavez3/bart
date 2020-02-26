@@ -7,12 +7,23 @@ import { IStation } from '../interfaces/i-station';
 })
 
 export class DataService {
-  //this page was a mistake, but kept it because it was working
-  //ended up using as a substitue for appPages
+  /*//////////////////////////////////
+  originally intended to collect all data of each page,
+  later realized I only needed to get NECESSARY information,
+  ended up keeping since it was the first working part of app
+  so ended up using it as a substitute for appPages in
+  app component.ts
+  *///////////////////////////////////
+
+  //url broken into 3 parts - beginning, abbreviation, key
   private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig='; 
   private stnInfoPt2 = '';  //put station abbreviations here
   private stnInfoPt3 = '&key=Z5RS-PL6X-97JT-DWE9&json=y'; //put your key here
+  private stnInfoURL; // to be sum of stnInfo pieces
 
+  private dataSheet;  // container for content of http.get
+
+  //array of abbreviations to pass thru to parseData
   stnAbbr = [
     '12th', '16th', '19th', '24th',
     'ashb', 'antc', 'balb', 'bayf',
@@ -28,16 +39,11 @@ export class DataService {
     'warm', 'wcrk', 'wdub', 'woak'
   ];
 
-  //[47].stnDesc["#cdata-section"]
-
-  private stnInfoURL;
-  private dataSheet;
-
-  //
+  //stores stnInfo but used for substitute as appPages in app component.ts
   stationsArr: IStation[] = [];
 
   constructor(private http: HttpClient) {
-    console.log('hello');
+    //test
     this.stnData();
   }
 
@@ -51,7 +57,8 @@ export class DataService {
     console.log(this.stationsArr);
   }
 
-  parseData(url) {
+
+  parseData(url: string) {
     //put http content into dataSheet
     this.dataSheet = this.http.get(url);
     //subscribe of observable : any
