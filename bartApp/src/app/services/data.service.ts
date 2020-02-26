@@ -8,11 +8,7 @@ import { IStation } from '../interfaces/i-station';
 
 export class DataService {
 
-<<<<<<< HEAD
   private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig='; 
-=======
-  private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=';
->>>>>>> 31612215bcaff3ce45b9c127e73da560fa38efb5
   private stnInfoPt2 = '';  //put station abbreviations here
   private stnInfoPt3 = '&key=Z5RS-PL6X-97JT-DWE9&json=y'; //put your key here
 
@@ -64,21 +60,6 @@ export class DataService {
         //filter, set s to desired filtered content
         let s = x.root.stations.station
         //transfer desired into info of type IStation
-<<<<<<< HEAD
-          let info: IStation = {
-            stnAbbr: s.abbr,
-            stnName: s.name,
-            stnAddress: s.address,
-            stnCity: s.city,
-            stnState: s.state,
-            stnZip: s.zipcode,
-            stnDesc: s.intro,
-            stnURL: 'folder/'+s.abbr
-          };
-          //push info into stationsArr
-          this.stationsArr.push(info);
-          //console log array back in StnData
-=======
         let info: IStation = {
           stnAbbr: s.abbr,
           stnName: s.name,
@@ -92,7 +73,6 @@ export class DataService {
         //push info into stationsArr
         this.stationsArr.push(info);
         //console log array back in StnData
->>>>>>> 31612215bcaff3ce45b9c127e73da560fa38efb5
       });
   } //end of parseData function
 
