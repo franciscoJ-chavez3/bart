@@ -6,4 +6,5 @@ export interface IStation {
     stnState: string;
     stnZip: string;
     stnDesc: string;
+    stnURL: string;
 }
