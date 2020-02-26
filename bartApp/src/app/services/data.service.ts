@@ -8,23 +8,27 @@ import { IStation } from '../interfaces/i-station';
 
 export class DataService {
 
+<<<<<<< HEAD
   private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig='; 
+=======
+  private stnInfoPt1 = 'http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig=';
+>>>>>>> 31612215bcaff3ce45b9c127e73da560fa38efb5
   private stnInfoPt2 = '';  //put station abbreviations here
   private stnInfoPt3 = '&key=Z5RS-PL6X-97JT-DWE9&json=y'; //put your key here
 
   stnAbbr = [
-   '12th', '16th', '19th', '24th',
-   'ashb', 'antc', 'balb', 'bayf', 
-   'cast', 'civc', 'cols', 'colm', 
-   'conc', 'daly', 'dbrk', 'dubl', 
-   'deln', 'plza', 'embr', 'frmt', 
-   'ftvl', 'glen', 'hayw', 'lafy', 
-   'lake', 'mcar', 'mlbr', 'mont', 
-   'nbrk', 'ncon', 'oakl', 'orin', 
-   'pitt', 'pctr', 'phil', 'powl', 
-   'rich', 'rock', 'sbrn', 'sfia', 
-   'sanl', 'shay', 'ssan', 'ucty', 
-   'warm', 'wcrk', 'wdub', 'woak'
+    '12th', '16th', '19th', '24th',
+    'ashb', 'antc', 'balb', 'bayf',
+    'cast', 'civc', 'cols', 'colm',
+    'conc', 'daly', 'dbrk', 'dubl',
+    'deln', 'plza', 'embr', 'frmt',
+    'ftvl', 'glen', 'hayw', 'lafy',
+    'lake', 'mcar', 'mlbr', 'mont',
+    'nbrk', 'ncon', 'oakl', 'orin',
+    'pitt', 'pctr', 'phil', 'powl',
+    'rich', 'rock', 'sbrn', 'sfia',
+    'sanl', 'shay', 'ssan', 'ucty',
+    'warm', 'wcrk', 'wdub', 'woak'
   ];
 
   //[47].stnDesc["#cdata-section"]
@@ -39,8 +43,8 @@ export class DataService {
     this.stnData();
   }
 
-  stnData(){
-    for(let i=0; i<this.stnAbbr.length; i++){
+  stnData() {
+    for (let i = 0; i < this.stnAbbr.length; i++) {
       this.stnInfoPt2 = this.stnAbbr[i];
       this.stnInfoURL = this.stnInfoPt1 + this.stnInfoPt2 + this.stnInfoPt3;
       this.parseData(this.stnInfoURL);
@@ -49,7 +53,7 @@ export class DataService {
     console.log(this.stationsArr);
   }
 
-  parseData(url){
+  parseData(url) {
     //put http content into dataSheet
     this.dataSheet = this.http.get(url);
     //subscribe of observable : any
@@ -60,6 +64,7 @@ export class DataService {
         //filter, set s to desired filtered content
         let s = x.root.stations.station
         //transfer desired into info of type IStation
+<<<<<<< HEAD
           let info: IStation = {
             stnAbbr: s.abbr,
             stnName: s.name,
@@ -73,6 +78,21 @@ export class DataService {
           //push info into stationsArr
           this.stationsArr.push(info);
           //console log array back in StnData
+=======
+        let info: IStation = {
+          stnAbbr: s.abbr,
+          stnName: s.name,
+          stnAddress: s.address,
+          stnCity: s.city,
+          stnState: s.state,
+          stnZip: s.zipcode,
+          stnDesc: s.intro,
+          stnURL: 'folder/' + s.abbr
+        };
+        //push info into stationsArr
+        this.stationsArr.push(info);
+        //console log array back in StnData
+>>>>>>> 31612215bcaff3ce45b9c127e73da560fa38efb5
       });
   } //end of parseData function
 

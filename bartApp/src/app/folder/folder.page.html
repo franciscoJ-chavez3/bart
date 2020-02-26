@@ -16,6 +16,21 @@
 
   <div id="container">
     <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
+        Components</a></p>
+    <div *ngFor="let fsd of folderStnData">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{fsd?.destAbbr}}
+          </ion-col>
+          <ion-col></ion-col>
+          <ion-col>
+            {{fsd?.destimate1}}, {{fsd?.destimate2}}, {{fsd?.destimate3}} min
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
+
 </ion-content>
